@@ -2,7 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Suspense, lazy, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { auth } from "./firebase";
@@ -56,12 +56,12 @@ function App() {
          if (gUser) {
             const data = await getUser(gUser.uid);
             dispatch(userExist(data.user));
+            <Navigate to={"/"} />;
          } else {
             dispatch(userNotExist());
          }
       });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
+   }, [user, dispatch]);
 
    return loading ? (
       <Loader />
