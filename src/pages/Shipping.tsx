@@ -8,8 +8,6 @@ import { saveShippingInfo } from "../redux/reducer/cartReducer";
 import { RootState, server } from "../redux/store";
 
 export default function Shipping() {
-   const { user } = useSelector((state: RootState) => state.userReducer);
-
    const { cartItems, total } = useSelector(
       (state: RootState) => state.cartReducer
    );
@@ -32,10 +30,6 @@ export default function Shipping() {
    };
 
    useEffect(() => {
-      if (!user) {
-         navigate("/login");
-      }
-
       if (cartItems.length <= 0) {
          return navigate("/cart");
       }
@@ -43,7 +37,7 @@ export default function Shipping() {
       if (localStorage.getItem("shippingInfo")) {
          setShippingInfo(JSON.parse(localStorage.getItem("shippingInfo")!));
       }
-   }, [cartItems, navigate, user]);
+   }, [cartItems, navigate]);
 
    const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
