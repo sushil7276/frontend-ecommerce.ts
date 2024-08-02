@@ -20,6 +20,7 @@ const Shipping = lazy(() => import("./pages/Shipping"));
 const Login = lazy(() => import("./pages/Login"));
 const Search = lazy(() => import("./pages/Search"));
 const Orders = lazy(() => import("./pages/Orders"));
+const OrderShow = lazy(() => import("./components/OrderShow"));
 
 // admin components
 const Transaction = lazy(() => import("./pages/admin/Transaction"));
@@ -94,33 +95,14 @@ function App() {
                >
                   <Route path='/shipping' element={<Shipping />} />
                   <Route path='/orders' element={<Orders />} />
+                  <Route path='/orders/details/:id' element={<OrderShow />} />
+
                   <Route path='/pay' element={<CheckOut />} />
                </Route>
 
                {/* Admin Routes */}
-               <Route path='/dashboard' element={<AdminSidebar />} />
-               <Route path='/admin/dashboard' element={<Dashboard />} />
-               <Route path='/admin/product' element={<Product />} />
-               <Route path='/admin/transaction' element={<Transaction />} />
-               <Route path='/admin/customer' element={<Customer />} />
-               <Route path='/admin/product/new' element={<NewProduct />} />
-               <Route
-                  path='/admin/product/:id'
-                  element={<ProductManagement />}
-               />
 
                <Route
-                  path='/admin/transaction/:id'
-                  element={<TransactionManagement />}
-               />
-               <Route path='/admin/chart/bar' element={<BarCharts />} />
-               <Route path='/admin/chart/pie' element={<PieCharts />} />
-               <Route path='/admin/chart/line' element={<LineCharts />} />
-               <Route path='/admin/app/stopwatch' element={<Stopwatch />} />
-               <Route path='/admin/app/coupon' element={<Coupon />} />
-               <Route path='/admin/app/toss' element={<Toss />} />
-
-               {/* <Route
                   element={
                      <ProtectedRoute
                         isAuthenticated={user ? true : false}
@@ -128,7 +110,29 @@ function App() {
                         adminRoute={true}
                      />
                   }
-               ></Route> */}
+               >
+                  <Route path='/dashboard' element={<AdminSidebar />} />
+                  <Route path='/admin/dashboard' element={<Dashboard />} />
+                  <Route path='/admin/product' element={<Product />} />
+                  <Route path='/admin/transaction' element={<Transaction />} />
+                  <Route path='/admin/customer' element={<Customer />} />
+                  <Route path='/admin/product/new' element={<NewProduct />} />
+                  <Route
+                     path='/admin/product/:id'
+                     element={<ProductManagement />}
+                  />
+
+                  <Route
+                     path='/admin/transaction/:id'
+                     element={<TransactionManagement />}
+                  />
+                  <Route path='/admin/chart/bar' element={<BarCharts />} />
+                  <Route path='/admin/chart/pie' element={<PieCharts />} />
+                  <Route path='/admin/chart/line' element={<LineCharts />} />
+                  <Route path='/admin/app/stopwatch' element={<Stopwatch />} />
+                  <Route path='/admin/app/coupon' element={<Coupon />} />
+                  <Route path='/admin/app/toss' element={<Toss />} />
+               </Route>
 
                <Route path='*' element={<NotFound />} />
             </Routes>
